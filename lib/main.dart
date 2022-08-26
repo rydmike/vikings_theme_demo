@@ -9,8 +9,8 @@
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
 //
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -308,8 +308,8 @@ class _VikingsThemeAppState extends State<VikingsThemeApp> {
       darkTheme: themingWay.theme(Brightness.dark, useMaterial3),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text(('Vikings Theme Dive')),
-          actions: [
+          title: const Text('Vikings Theme Dive'),
+          actions: <Widget>[
             IconButton(
               icon: useMaterial3
                   ? const Icon(Icons.filter_3)
@@ -319,7 +319,7 @@ class _VikingsThemeAppState extends State<VikingsThemeApp> {
                   useMaterial3 = !useMaterial3;
                 });
               },
-              tooltip: "Switch to Material ${useMaterial3 ? 2 : 3}",
+              tooltip: 'Switch to Material ${useMaterial3 ? 2 : 3}',
             ),
             IconButton(
               icon: themeMode == ThemeMode.dark
@@ -334,7 +334,7 @@ class _VikingsThemeAppState extends State<VikingsThemeApp> {
                   }
                 });
               },
-              tooltip: "Toggle brightness",
+              tooltip: 'Toggle brightness',
             ),
             ThemePopupMenu(
               themingWay: themingWay,
@@ -394,10 +394,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String materialType =
-        Theme.of(context).useMaterial3 ? "Material 3" : "Material 2";
+        Theme.of(context).useMaterial3 ? 'Material 3' : 'Material 2';
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      children: [
+      children: <Widget>[
         const SizedBox(height: 8),
         Text(
           materialType,
@@ -535,7 +535,7 @@ class ThemeShowcase extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Text('Primary TextTheme',
-                      style: Theme.of(context).primaryTextTheme.subtitle1),
+                      style: Theme.of(context).primaryTextTheme.titleMedium),
                 ),
                 const PrimaryTextThemeShowcase(),
               ],
@@ -1261,7 +1261,7 @@ class AppBarShowcase extends StatelessWidget {
 }
 
 class _BehindAppBar extends StatelessWidget {
-  const _BehindAppBar({super.key});
+  const _BehindAppBar();
 
   @override
   Widget build(BuildContext context) {
@@ -2805,7 +2805,7 @@ class ShowThemeDataColors extends StatelessWidget {
                 textColor: _onColor(theme.hintColor, background),
               ),
               ColorCard(
-                label: 'Selected\nRow',
+                label: 'Selected\nRow\n(DEPRECATED)',
                 color: theme.selectedRowColor,
                 textColor: _onColor(theme.selectedRowColor, background),
               ),
@@ -2822,7 +2822,7 @@ class ShowThemeDataColors extends StatelessWidget {
   }
 }
 
-/// A [SizeBox] with a [Card] and string text in it. Used in this demo to
+/// A [SizedBox] with a [Card] and string text in it. Used in this demo to
 /// display theme color boxes.
 ///
 /// Can specify label text color and background color.
