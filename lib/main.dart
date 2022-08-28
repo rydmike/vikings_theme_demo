@@ -243,6 +243,8 @@ ThemeData themeTen(Brightness mode, bool useMaterial3) =>
                 Colors.black.withAlpha(0x66), mySchemeLight.primary),
             secondaryHeaderColor: Color.alphaBlend(
                 Colors.white.withAlpha(0xCC), mySchemeLight.primary),
+            toggleableActiveColor:
+                useMaterial3 ? mySchemeLight.primary : mySchemeLight.secondary,
             scaffoldBackgroundColor: mySchemeLight.background,
             canvasColor: mySchemeLight.background,
             backgroundColor: mySchemeLight.background,
@@ -265,6 +267,8 @@ ThemeData themeTen(Brightness mode, bool useMaterial3) =>
                 Colors.black.withAlpha(0x72), mySchemeDark.primary),
             secondaryHeaderColor: Color.alphaBlend(
                 Colors.black.withAlpha(0x99), mySchemeDark.primary),
+            toggleableActiveColor:
+                useMaterial3 ? mySchemeDark.primary : mySchemeDark.secondary,
             scaffoldBackgroundColor: mySchemeDark.background,
             canvasColor: mySchemeDark.background,
             backgroundColor: mySchemeDark.background,
@@ -966,8 +970,17 @@ class _DropDownButtonFormFieldState extends State<_DropDownButtonFormField> {
   }
 }
 
-class IconButtonCircleAvatarDropdownTooltipShowcase extends StatelessWidget {
+class IconButtonCircleAvatarDropdownTooltipShowcase extends StatefulWidget {
   const IconButtonCircleAvatarDropdownTooltipShowcase({super.key});
+
+  @override
+  State<IconButtonCircleAvatarDropdownTooltipShowcase> createState() =>
+      _IconButtonCircleAvatarDropdownTooltipShowcaseState();
+}
+
+class _IconButtonCircleAvatarDropdownTooltipShowcaseState
+    extends State<IconButtonCircleAvatarDropdownTooltipShowcase> {
+  bool isLockOpen = false;
 
   @override
   Widget build(BuildContext context) {
@@ -982,6 +995,20 @@ class IconButtonCircleAvatarDropdownTooltipShowcase extends StatelessWidget {
             icon: const Icon(Icons.accessibility),
             tooltip: 'Tooltip on\nIconButton',
             onPressed: () {},
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: IconButton(
+            icon: const Icon(Icons.lock_outlined),
+            selectedIcon: const Icon(Icons.lock_open_outlined),
+            tooltip: isLockOpen ? 'In M3 tap to close' : 'In M3 tap to open',
+            isSelected: isLockOpen,
+            onPressed: () {
+              setState(() {
+                isLockOpen = !isLockOpen;
+              });
+            },
           ),
         ),
         const Tooltip(
@@ -1918,17 +1945,44 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           'color canvasColor is going to be deprecated in Flutter SDK',
           style: denseBody,
         ),
-        Material(
+        const Divider(),
+        const SizedBox(height: 8),
+        const Material(
           type: MaterialType.canvas,
           elevation: 0,
-          surfaceTintColor: colorScheme.surfaceTint,
-          shadowColor: colorScheme.shadow,
-          child: const SizedBox(
+          child: SizedBox(
             height: 50,
-            child: Center(child: Text('Material type canvas, elevation 0')),
+            child: Center(
+                child: Text('Material type canvas, elevation 0, '
+                    'default')),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 8),
+        const Divider(),
+        const SizedBox(height: 8),
+        const Material(
+          type: MaterialType.canvas,
+          elevation: 1,
+          child: SizedBox(
+            height: 50,
+            child: Center(
+                child: Text('Material type canvas, elevation 1, '
+                    'default')),
+          ),
+        ),
+        const SizedBox(height: 8),
+        Material(
+          type: MaterialType.canvas,
+          elevation: 1,
+          surfaceTintColor: colorScheme.surfaceTint,
+          child: const SizedBox(
+            height: 50,
+            child: Center(
+                child: Text('Material type canvas, elevation 1, '
+                    'with surfaceTint, no shadow')),
+          ),
+        ),
+        const SizedBox(height: 8),
         Material(
           type: MaterialType.canvas,
           elevation: 1,
@@ -1938,47 +1992,50 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
             height: 50,
             child: Center(
                 child: Text('Material type canvas, elevation 1, '
-                    'with shadow')),
+                    'with surfaceTint, and shadow')),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 8),
+        const Divider(),
+        const SizedBox(height: 8),
+        const Material(
+          type: MaterialType.canvas,
+          elevation: 6,
+          child: SizedBox(
+            height: 50,
+            child: Center(
+                child: Text('Material type canvas, elevation 6, '
+                    'default')),
+          ),
+        ),
+        const SizedBox(height: 8),
         Material(
           type: MaterialType.canvas,
-          elevation: 1,
+          elevation: 6,
           surfaceTintColor: colorScheme.surfaceTint,
           child: const SizedBox(
             height: 50,
             child: Center(
-                child: Text('Material type canvas, elevation 1, '
-                    'no shadow')),
+                child: Text('Material type canvas, elevation 6, '
+                    'with surfaceTint, no shadow')),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 8),
         Material(
           type: MaterialType.canvas,
-          elevation: 4,
+          elevation: 6,
           surfaceTintColor: colorScheme.surfaceTint,
           shadowColor: colorScheme.shadow,
           child: const SizedBox(
             height: 50,
             child: Center(
-                child: Text('Material type canvas, elevation 4, '
-                    'with shadow')),
+                child: Text('Material type canvas, elevation 6, '
+                    'with surfaceTint, and shadow')),
           ),
         ),
-        const SizedBox(height: 10),
-        Material(
-          type: MaterialType.canvas,
-          elevation: 4,
-          surfaceTintColor: colorScheme.surfaceTint,
-          child: const SizedBox(
-            height: 50,
-            child: Center(
-                child: Text('Material type canvas, elevation 4, '
-                    'no shadow')),
-          ),
-        ),
-        const SizedBox(height: 32),
+        const SizedBox(height: 8),
+        const Divider(),
+        const SizedBox(height: 8),
         Text('Material type card', style: denseHeader),
         Text(
           'Default background color is theme cardColor, and '
@@ -1986,17 +2043,44 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           'color cardColor is going to be deprecated in Flutter SDK',
           style: denseBody,
         ),
-        Material(
+        const Divider(),
+        const SizedBox(height: 8),
+        const Material(
           type: MaterialType.card,
           elevation: 0,
-          surfaceTintColor: colorScheme.surfaceTint,
-          shadowColor: colorScheme.shadow,
-          child: const SizedBox(
+          child: SizedBox(
             height: 50,
-            child: Center(child: Text('Material type card, elevation 0')),
+            child: Center(
+                child: Text('Material type card, elevation 0, '
+                    'default')),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 8),
+        const Divider(),
+        const SizedBox(height: 8),
+        const Material(
+          type: MaterialType.card,
+          elevation: 1,
+          child: SizedBox(
+            height: 50,
+            child: Center(
+                child: Text('Material type card, elevation 1, '
+                    'default')),
+          ),
+        ),
+        const SizedBox(height: 8),
+        Material(
+          type: MaterialType.card,
+          elevation: 1,
+          surfaceTintColor: colorScheme.surfaceTint,
+          child: const SizedBox(
+            height: 50,
+            child: Center(
+                child: Text('Material type card, elevation 1, '
+                    'with surfaceTint, no shadow')),
+          ),
+        ),
+        const SizedBox(height: 8),
         Material(
           type: MaterialType.card,
           elevation: 1,
@@ -2006,47 +2090,50 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
             height: 50,
             child: Center(
                 child: Text('Material type card, elevation 1, '
-                    'with shadow')),
+                    'with surfaceTint, and shadow')),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 8),
+        const Divider(),
+        const SizedBox(height: 8),
+        const Material(
+          type: MaterialType.card,
+          elevation: 6,
+          child: SizedBox(
+            height: 50,
+            child: Center(
+                child: Text('Material type card, elevation 6, '
+                    'default')),
+          ),
+        ),
+        const SizedBox(height: 8),
         Material(
           type: MaterialType.card,
-          elevation: 1,
+          elevation: 6,
           surfaceTintColor: colorScheme.surfaceTint,
           child: const SizedBox(
             height: 50,
             child: Center(
-                child: Text('Material type card, elevation 1, '
-                    'no shadow')),
+                child: Text('Material type card, elevation 6, '
+                    'with surfaceTint, no shadow')),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 8),
         Material(
           type: MaterialType.card,
-          elevation: 4,
+          elevation: 6,
           surfaceTintColor: colorScheme.surfaceTint,
           shadowColor: colorScheme.shadow,
           child: const SizedBox(
             height: 50,
             child: Center(
-                child: Text('Material type card, elevation 4, '
-                    'with shadow')),
+                child: Text('Material type card, elevation 6, '
+                    'with surfaceTint, and shadow')),
           ),
         ),
-        const SizedBox(height: 10),
-        Material(
-          type: MaterialType.card,
-          elevation: 4,
-          surfaceTintColor: colorScheme.surfaceTint,
-          child: const SizedBox(
-            height: 50,
-            child: Center(
-                child: Text('Material type card, elevation 4, '
-                    'no shadow')),
-          ),
-        ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 8),
+        const Divider(),
+        const SizedBox(height: 8),
         const Divider(height: 1),
         MaterialBanner(
           padding: const EdgeInsets.all(20),
@@ -2147,64 +2234,94 @@ class CardShowcase extends StatelessWidget {
           surfaceTintColor: colorScheme.surfaceTint,
           child: const SizedBox(
             height: 50,
-            child: Center(child: Text('Card, elevation 0, with shadow')),
+            child: Center(child: Text('Card, elevation 0')),
           ),
         ),
         const SizedBox(height: 10),
+        const Card(
+          elevation: 1,
+          child: SizedBox(
+            height: 50,
+            child: Center(child: Text('Card, elevation 1, default')),
+          ),
+        ),
+        const SizedBox(height: 2),
         Card(
           elevation: 1,
           surfaceTintColor: colorScheme.surfaceTint,
           child: const SizedBox(
             height: 50,
-            child: Center(child: Text('Card, elevation 1, with shadow')),
+            child: Center(child: Text('Card, elevation 1, with surfaceTint')),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 2),
         Card(
           elevation: 1,
           surfaceTintColor: colorScheme.surfaceTint,
           shadowColor: Colors.transparent,
           child: const SizedBox(
             height: 50,
-            child: Center(child: Text('Card, elevation 1, no shadow')),
+            child: Center(
+                child: Text('Card, elevation 1,  with surfaceTint, '
+                    'transparent shadow')),
           ),
         ),
-        const SizedBox(height: 10),
+        const Divider(),
+        const Card(
+          elevation: 4,
+          child: SizedBox(
+            height: 50,
+            child: Center(child: Text('Card, elevation 4, default')),
+          ),
+        ),
+        const SizedBox(height: 4),
         Card(
           elevation: 4,
           surfaceTintColor: colorScheme.surfaceTint,
           child: const SizedBox(
             height: 50,
-            child: Center(child: Text('Card, elevation 4, with shadow')),
+            child: Center(child: Text('Card, elevation 4, with surfaceTint')),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 4),
         Card(
           elevation: 4,
           surfaceTintColor: colorScheme.surfaceTint,
           shadowColor: Colors.transparent,
           child: const SizedBox(
             height: 50,
-            child: Center(child: Text('Card, elevation 4, no shadow')),
+            child: Center(
+                child: Text('Card, elevation 4, with surfaceTint, '
+                    'transparent shadow')),
+          ),
+        ),
+        const Divider(),
+        const Card(
+          elevation: 10,
+          child: SizedBox(
+            height: 50,
+            child: Center(child: Text('Card, elevation 10, default')),
           ),
         ),
         const SizedBox(height: 10),
         Card(
-          elevation: 8,
+          elevation: 10,
           surfaceTintColor: colorScheme.surfaceTint,
           child: const SizedBox(
             height: 50,
-            child: Center(child: Text('Card, elevation 8, with shadow')),
+            child: Center(child: Text('Card, elevation 10, with surfaceTint')),
           ),
         ),
         const SizedBox(height: 10),
         Card(
-          elevation: 8,
+          elevation: 10,
           surfaceTintColor: colorScheme.surfaceTint,
           shadowColor: Colors.transparent,
           child: const SizedBox(
             height: 50,
-            child: Center(child: Text('Card, elevation 8, no shadow')),
+            child: Center(
+                child: Text('Card, elevation 10, with surfaceTint, '
+                    'transparent shadow')),
           ),
         ),
       ],
@@ -2725,7 +2842,7 @@ class ShowThemeDataColors extends StatelessWidget {
                 textColor: _onColor(theme.secondaryHeaderColor, background),
               ),
               ColorCard(
-                label: 'Toggleable\nActive\n(DEPRECATED)',
+                label: 'Toggleable\nActive',
                 color: theme.toggleableActiveColor,
                 textColor: _onColor(theme.toggleableActiveColor, background),
               ),
@@ -2805,7 +2922,7 @@ class ShowThemeDataColors extends StatelessWidget {
                 textColor: _onColor(theme.hintColor, background),
               ),
               ColorCard(
-                label: 'Selected\nRow\n(DEPRECATED)',
+                label: 'Selected\nRow',
                 color: theme.selectedRowColor,
                 textColor: _onColor(theme.selectedRowColor, background),
               ),
