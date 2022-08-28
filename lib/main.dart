@@ -513,6 +513,7 @@ class ThemeShowcase extends StatelessWidget {
         const CardShowcase(),
         const SizedBox(height: 8),
         Card(
+          elevation: 0,
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -530,6 +531,7 @@ class ThemeShowcase extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Card(
+          elevation: 0,
           color: Theme.of(context).colorScheme.primary,
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -1050,12 +1052,9 @@ class ChipShowcase extends StatelessWidget {
           avatar: const Icon(Icons.settings),
           onPressed: () {},
         ),
-        ActionChip(
-          label: const Text('ActionChip'),
-          avatar: const Icon(Icons.settings),
-          // TODO(rydmike): Uncomment in 3.1.0 to get disabled ActionChip.
-          // The onPressed is required in 3.0.5 stable, but not in 3.1.0 master.
-          onPressed: () {},
+        const ActionChip(
+          label: Text('ActionChip'),
+          avatar: Icon(Icons.settings),
         ),
         FilterChip(
           label: const Text('FilterChip'),
