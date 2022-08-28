@@ -10,9 +10,11 @@ The demo requires Flutter 3.3.0, use beat channel with 3.3.0 for now.
 It is also available as gist [here](https://gist.github.com/rydmike/6119077e4ba215f7eba87b785c06eaae).
 
 To run it DartPad 3.3.0 use its beta channel version,
-[here](https://dartpad.dev/?id=6119077e4ba215f7eba87b785c06eaae&channel=beta).
+[here](https://dartpad.dev/?id=6119077e4ba215f7eba87b785c06eaae&channel=beta), here is
+also a **bitly** link to version in beta: https://bit.ly/3Ksu8zY
 
 When Flutter 3.3.0 stable is release, this DartPad 
-[stable link](https://dartpad.dev/?id=6119077e4ba215f7eba87b785c06eaae) should work too.
+[stable link](https://dartpad.dev/?id=6119077e4ba215f7eba87b785c06eaae) should work too, as well as
+its **bitly** link too: https://bit.ly/3wAYQBf
 
 <img src="https://github.com/rydmike/vikings_theme_demo/blob/master/doc_assets/vikings_theme_demo.png?raw=true?" alt="vikings theme demo" width="450"/>
