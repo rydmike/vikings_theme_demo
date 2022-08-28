@@ -1156,7 +1156,7 @@ class _TextInputFieldState extends State<TextInputField> {
           decoration: InputDecoration(
             filled: widget.filled ?? true,
             hintText: 'Write something...',
-            labelText: 'TextField - Underline border, if not defined',
+            labelText: 'TextField - Underline border',
             errorText: _errorState1
                 ? "Any entry without an 'a' will trigger this error"
                 : null,
@@ -1179,7 +1179,7 @@ class _TextInputFieldState extends State<TextInputField> {
             filled: widget.filled ?? true,
             border: const OutlineInputBorder(),
             hintText: 'Write something...',
-            labelText: 'TextField - Outline border, if not defined',
+            labelText: 'TextField - Outline border',
             prefixIcon: const Icon(Icons.search),
             suffixIcon: const Icon(Icons.info),
             errorText: _errorState2
