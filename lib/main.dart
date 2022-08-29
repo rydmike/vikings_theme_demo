@@ -259,10 +259,14 @@ ThemeData themeTen(Brightness mode, bool useMaterial3) =>
             applyElevationOverlayColor: false,
             useMaterial3: useMaterial3,
             visualDensity: VisualDensity.standard,
+            tabBarTheme: TabBarTheme(
+                labelColor: useMaterial3
+                    ? mySchemeLight.onSurface
+                    : mySchemeLight.onPrimary),
           )
         : ThemeData(
             colorScheme: mySchemeDark,
-            primaryColor: mySchemeDark.surface,
+            primaryColor: mySchemeDark.primary,
             primaryColorLight: Color.alphaBlend(
                 Colors.white.withAlpha(0x59), mySchemeDark.primary),
             primaryColorDark: Color.alphaBlend(
@@ -283,6 +287,7 @@ ThemeData themeTen(Brightness mode, bool useMaterial3) =>
             applyElevationOverlayColor: true,
             useMaterial3: useMaterial3,
             visualDensity: VisualDensity.standard,
+            tabBarTheme: TabBarTheme(labelColor: mySchemeDark.onSurface),
           );
 
 // App breakpoints
@@ -376,7 +381,7 @@ class ThemePopupMenu extends StatelessWidget {
       tooltip: 'Theming way',
       padding: const EdgeInsets.all(10),
       onSelected: onChanged,
-      constraints: const BoxConstraints(maxWidth: 470),
+      constraints: const BoxConstraints(maxWidth: 490),
       itemBuilder: (BuildContext context) => <PopupMenuItem<ThemingWay>>[
         for (ThemingWay item in ThemingWay.values)
           PopupMenuItem<ThemingWay>(
@@ -1227,8 +1232,8 @@ class AppBarShowcase extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           CustomScrollView(
-            // Normally avoid shrinkWrap, but for showing a few widgets here
-            // it is fine
+            // Normally avoid shrinkWrap, but for showing a few demo
+            // widgets here, we can get away with it.
             shrinkWrap: true,
             slivers: <Widget>[
               SliverAppBar(
@@ -1537,8 +1542,7 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
           child: Text(
-            'Default SDK background color is theme.colorScheme.surface. '
-            'FlexColorScheme sub-theme default is colorScheme.background.',
+            'Default background color is colorScheme.surface.',
             style: denseBody,
           ),
         ),
